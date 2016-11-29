@@ -31,13 +31,13 @@ feature "template", focus: true do
     end
   end
 
-  context "read" do
-    scenario "user views a book" do
-      
-    end
-  end
-
   xcontext "pending specs" do
+    context "read" do
+      scenario "user views a book" do
+
+      end
+    end
+
     context "update" do
       scenario "user edits a thing" do
 
