@@ -27,12 +27,6 @@ Capybara.app = Sinatra::Application
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
-
-  config.before(:each) do
-    File.open(Book.csv_file, "w") do |f|
-      f.puts("title;author;description")
-    end
-  end
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest
   # assertions if you prefer.
