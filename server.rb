@@ -14,7 +14,6 @@ end
 get "/books" do
   @books = []
   CSV.foreach(csv_file, headers: true) do |row|
-    binding.pry
     @books << row.to_h
   end
   erb :"books/index"
