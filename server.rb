@@ -3,8 +3,6 @@ require "pry"
 require "csv"
 
 
-require_relative "models/book"
-
 set :bind, "0.0.0.0"
 set :views, File.join(File.dirname(__FILE__), "views")
 
@@ -16,9 +14,29 @@ end
 get "/books" do
   @books = []
   CSV.foreach(csv_file, headers: true) do |row|
+    binding.pry
     @books << row.to_h
   end
   erb :"books/index"
+end
+
+get "/books/new" do
+  erb :"books/new"
+end
+
+post "/books/new" do
+  title = params["title"]
+  author = params["author"]
+  genre = params["genre"]
+  if [title, author, genre].include?("")
+    @error = true
+    erb :"books/new"
+  else
+    CSV.open(csv_file, "a", headers: true) do |csv|
+      csv << [params["title"], params["author"], params["description"]]
+    end
+    redirect "/books"
+  end
 end
 
 
