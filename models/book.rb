@@ -1,18 +1,10 @@
 require "csv"
 
 class Book
-  attr_reader :title, :author, :rating, :url
-
-  def initialize(title, author, rating, url)
-    @title = title
-    @author = author
-    @rating = rating
-    @url = url
-  end
 
   def save
     CSV.open(Book.csv_file, "ab", Book.csv_options) do |csv|
-      csv << [title, author, rating, url]
+      csv << [title, author, description]
     end
   end
 
@@ -41,7 +33,7 @@ class Book
 
   def self.reset_csv
     CSV.open(Book.csv_file, "wb", Book.csv_options) do |csv|
-      csv << ["title", "author", "rating", "url"]
+      csv << ["title", "author", "description"]
     end
   end
 end
